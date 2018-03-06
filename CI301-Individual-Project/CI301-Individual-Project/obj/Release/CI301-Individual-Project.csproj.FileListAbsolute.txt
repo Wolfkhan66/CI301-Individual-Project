@@ -62,6 +62,5 @@ C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project
 C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\bin\Microsoft.AI.Web.xml
-C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\obj\Debug\CI301-Individual-Project.dll
-C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\obj\Debug\CI301-Individual-Project.pdb
-C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\obj\Debug\CI301-Individual-Project.csprojResolveAssemblyReference.cache
+C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\obj\Release\CI301-Individual-Project.dll
+C:\Users\Wolf\Documents\GitHub\CI301-Individual-Project\CI301-Individual-Project\CI301-Individual-Project\obj\Release\CI301-Individual-Project.pdb

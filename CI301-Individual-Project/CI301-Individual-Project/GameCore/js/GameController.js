@@ -23,6 +23,7 @@ function create() {
     console.log("Creating World...");
     // Load System Classes \\
     ui = new UI();
+    ui.setScreen("MainMenu");
 
     console.log("Creation complete.");
 }
