@@ -34,6 +34,26 @@ class UI {
     this.addEvent("InGameBackText", function() {
       ui.setScreen("MainMenu")
     }, null);
+
+    this.createText("CreateRockText", "InGame", 30, 560, "Rock", 20)
+    this.addEvent("CreateRockText", null, function() {
+      gameWorld.createAsset("Rock");
+    });
+
+    this.createText("CreatePickAxeText", "InGame", 130, 560, "PickAxe", 20)
+    this.addEvent("CreatePickAxeText", null, function() {
+      gameWorld.createAsset("PickAxe");
+    });
+
+    this.createText("CreateStoneText", "InGame", 230, 560, "Stone", 20)
+    this.addEvent("CreateStoneText", null, function() {
+      gameWorld.createAsset("Stone");
+    });
+
+    this.createText("CreateStorageText", "InGame", 330, 560, "Storage", 20)
+    this.addEvent("CreateStorageText", null, function() {
+      gameWorld.createAsset("Storage");
+    });
   }
 
   setScreen(screen) {

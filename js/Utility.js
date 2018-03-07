@@ -1,11 +1,13 @@
 class Utility {
   constructor() {
     this.active = false;
+    this.utilities = [];
   }
 
   checkConditions() {
     if (this.active) {
       this.testAction();
+
     }
   }
 
