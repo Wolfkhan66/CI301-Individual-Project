@@ -11,20 +11,20 @@ class UI {
     this.createText("SplashText", "MainMenu", game.width / 2, game.height / 2, "This is the Main Menu", 20)
     this.createText("SplashContinueText", "MainMenu", game.width / 2, game.height / 2 + 30, "click to continue", 20)
     this.addEvent("SplashContinueText", function() {
-      ui.setScreen("AISelect")
+      ui.setScreen("AISelect");
     }, null);
 
     //AISelect UI
     this.createText("AISelectText", "AISelect", game.width / 2, game.height / 2, "This is the AISelect", 20)
     this.createText("SelectFSMText", "AISelect", game.width / 2, game.height / 2 + 30, "Select Finite State Machine AI", 20)
     this.addEvent("SelectFSMText", function() {
-      ui.setScreen("InGame")
+      ui.setScreen("InGame");
       gameWorld.worker.setAI("FSM");
     }, null);
 
     this.createText("SelectUtilityText", "AISelect", game.width / 2, game.height / 2 + 60, "Select Utility AI", 20)
     this.addEvent("SelectUtilityText", function() {
-      ui.setScreen("InGame")
+      ui.setScreen("InGame");
       gameWorld.worker.setAI("Utility");
     }, null);
 
@@ -32,7 +32,8 @@ class UI {
     this.createText("InGameText", "InGame", game.width / 2, game.height / 2, "This is the InGame screen", 20)
     this.createText("InGameBackText", "InGame", game.width / 2, game.height / 2 + 30, "click to go back", 20)
     this.addEvent("InGameBackText", function() {
-      ui.setScreen("MainMenu")
+      ui.setScreen("MainMenu");
+      gameWorld.cleanUp();
     }, null);
 
     this.createText("CreateRockText", "InGame", 30, 560, "Rock", 20)

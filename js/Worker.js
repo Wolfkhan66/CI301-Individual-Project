@@ -1,6 +1,6 @@
 class Worker {
   constructor() {
-    console.log("Constructing Worker")
+    console.log("Constructing Worker");
     this.sprite = game.add.sprite(80, 80, 'worker', 'worker.png');
     this.fsm = new FSM();
     this.utility = new Utility();

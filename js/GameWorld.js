@@ -37,9 +37,10 @@ class GameWorld {
   }
 
   cleanUp() {
-    //Ensure sprites are removed from memory first then clear the array.
-    this.assets.forEach(element => assets.sprite.kill());
+    this.assets.forEach(asset => asset.Sprite.kill());
+    this.assets.forEach(asset => asset.Text.kill());
     this.assets = [];
+    this.assetTypes.forEach(assetType => assetType.Count = 0);
   }
 
   createAsset(type) {
