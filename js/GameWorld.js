@@ -1,29 +1,54 @@
 class GameWorld {
   constructor() {
+    console.log("Constructing Game World");
+    this.elements = [];
     this.worker = new Worker();
   }
 
-  update(){
-
+  update() {
+    if(this.worker.fsm.active){
+        this.worker.fsm.checkConditions();
+    }
+    if(this.worker.utility.active){
+        this.worker.utility.checkConditions();
+    }
   }
 
-  cleanUp(){
-
+  cleanUp() {
+    //Ensure sprites are removed from memory first then clear the array.
+    this.elements.forEach(element => element.sprite.kill());
+    this.elements = [];
   }
 
-  createRock(){
-    // TO DO
+  createRock() {
+    var sprite = game.add.sprite(0, 0, 'rock', 'rock.png');
+    this.elements.push({
+      Sprite: sprite,
+      ID: "Rock"
+    });
   }
 
-  createPickAxe(){
-   // TO DO
+  createPickAxe() {
+    var sprite = game.add.sprite(0, 0, 'pickaxe', 'rock.png');
+    this.elements.push({
+      Sprite: sprite,
+      ID: "PickAxe"
+    });
   }
 
-  createStone(){
-    // TO DO
+  createStone() {
+    var sprite = game.add.sprite(0, 0, 'stone', 'rock.png');
+    this.elements.push({
+      Sprite: sprite,
+      ID: "Stone"
+    });
   }
 
-  createStorage(){
-    // TO DO
+  createStorage() {
+    var sprite = game.add.sprite(0, 0, 'storage', 'rock.png');
+    this.elements.push({
+      Sprite: sprite,
+      ID: "Storage"
+    });
   }
 }
