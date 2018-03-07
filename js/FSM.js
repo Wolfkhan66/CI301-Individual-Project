@@ -14,10 +14,28 @@ class FSM {
   update() {
     switch (this.state) {
       case "Test":
-        console.log("Test State Running")
+        console.log("Test State Running");
+        break;
+      case "Moving":
+          //TODO
+        break;
+      case "Getting stone":
+          //TODO
+        break;
+      case "Getting PickAxe":
+          //TODO
+        break;
+      case "Breaking Rock":
+          //TODO
+        break;
+      case "Storing stone":
+          //TODO
+        break;
+      case "Resting":
+          //TODO
         break;
       default:
-        console.log("No State Found")
+        console.log("ERROR: State '" + this.state + " ' Not Found");
     }
   }
 

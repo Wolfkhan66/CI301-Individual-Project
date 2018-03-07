@@ -9,8 +9,32 @@ class Utility {
     }
   }
 
-  testAction(){
+  testAction() {
     console.log("Test Action Running");
+  }
+
+  move() {
+    //TODO
+  }
+
+  getStone() {
+    //TODO
+  }
+
+  getPickAxe() {
+    //TODO
+  }
+
+  breakRock() {
+    //TODO
+  }
+
+  storeStone() {
+    //TODO
+  }
+
+  rest() {
+    //TODO
   }
 
   setActive() {
