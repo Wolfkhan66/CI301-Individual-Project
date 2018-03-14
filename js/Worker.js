@@ -2,6 +2,8 @@ class Worker {
   constructor() {
     console.log("Constructing Worker");
     this.sprite = game.add.sprite(80, 80, 'worker', 'worker.png');
+    game.physics.arcade.enable(this.sprite);
+    this.sprite.enableBody = true;
     this.fsm = new FSM();
     this.utility = new Utility();
     this.hasStone = false;

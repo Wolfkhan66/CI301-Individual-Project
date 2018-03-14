@@ -5,37 +5,60 @@ class FSM {
   }
 
   checkConditions() {
+    var worker = gameWorld.worker;
     if (this.active) {
-      this.state = "Test";
+      console.log("Checking FSM Conditions");
+      if (gameWorld.getAssetCount("PickAxe") > 0 && worker.hasPickAxe === false) {
+        this.state = "Getting PickAxe";
+      } else if (gameWorld.getAssetCount("Rock") > 0 && worker.hasPickAxe === true) {
+        this.state = "Breaking Rock";
+      } else {
+        this.state = "Resting";
+      }
       this.update();
     }
   }
 
   update() {
+    var targetSprite;
     switch (this.state) {
       case "Test":
         console.log("Test State Running");
         break;
-      case "Moving":
-          //TODO
-        break;
       case "Getting stone":
-          //TODO
+        this.moveToTarget(gameWorld.getSprite("Stone"))
+        gameWorld.checkCollisions("Stone");
         break;
       case "Getting PickAxe":
-          //TODO
+        this.moveToTarget(gameWorld.getSprite("PickAxe"))
+        gameWorld.checkCollisions("PickAxe");
         break;
       case "Breaking Rock":
-          //TODO
+        this.moveToTarget(gameWorld.getSprite("Rock"))
+        gameWorld.checkCollisions("Rock");
         break;
       case "Storing stone":
-          //TODO
+        this.moveToTarget(gameWorld.getSprite("Storage"))
+        gameWorld.checkCollisions("Storage");
         break;
       case "Resting":
-          //TODO
+        console.log("Resting");
         break;
       default:
         console.log("ERROR: State '" + this.state + " ' Not Found");
+    }
+  }
+
+  moveToTarget(targetSprite) {
+    if (targetSprite.x > gameWorld.worker.sprite.x) {
+      gameWorld.worker.sprite.x++;
+    } else {
+      gameWorld.worker.sprite.x--;
+    }
+    if (targetSprite.y > gameWorld.worker.sprite.y) {
+      gameWorld.worker.sprite.y++;
+    } else {
+      gameWorld.worker.sprite.y--;
     }
   }
 
