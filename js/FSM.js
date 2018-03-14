@@ -8,7 +8,11 @@ class FSM {
     var worker = gameWorld.worker;
     if (this.active) {
       console.log("Checking FSM Conditions");
-      if (gameWorld.getAssetCount("PickAxe") > 0 && worker.hasPickAxe === false) {
+      if (gameWorld.getAssetCount("Stone") > 0 && worker.hasStone === false) {
+        this.state = "Getting Stone";
+      } else if (worker.hasStone === true) {
+        this.state = "Storing Stone";
+      } else if (gameWorld.getAssetCount("PickAxe") > 0 && worker.hasPickAxe === false) {
         this.state = "Getting PickAxe";
       } else if (gameWorld.getAssetCount("Rock") > 0 && worker.hasPickAxe === true) {
         this.state = "Breaking Rock";
@@ -25,7 +29,7 @@ class FSM {
       case "Test":
         console.log("Test State Running");
         break;
-      case "Getting stone":
+      case "Getting Stone":
         this.moveToTarget(gameWorld.getSprite("Stone"))
         gameWorld.checkCollisions("Stone");
         break;
@@ -37,7 +41,7 @@ class FSM {
         this.moveToTarget(gameWorld.getSprite("Rock"))
         gameWorld.checkCollisions("Rock");
         break;
-      case "Storing stone":
+      case "Storing Stone":
         this.moveToTarget(gameWorld.getSprite("Storage"))
         gameWorld.checkCollisions("Storage");
         break;

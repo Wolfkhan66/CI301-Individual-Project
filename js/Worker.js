@@ -1,7 +1,7 @@
 class Worker {
   constructor() {
     console.log("Constructing Worker");
-    this.sprite = game.add.sprite(80, 80, 'worker', 'worker.png');
+    this.sprite = game.add.sprite(125, 275, 'worker', 'worker.png');
     game.physics.arcade.enable(this.sprite);
     this.sprite.enableBody = true;
     this.fsm = new FSM();

@@ -29,6 +29,9 @@ class GameWorld {
   }
 
   update() {
+    if (gameWorld.getAssetCount("Storage") === 0) {
+      this.createAsset("Storage");
+    }
     if (this.worker.fsm.active) {
       this.worker.fsm.checkConditions();
     }
@@ -49,6 +52,12 @@ class GameWorld {
           case "Rock":
             game.physics.arcade.overlap(gameWorld.worker.sprite, asset.Sprite, gameWorld.rockCollision);
             break;
+          case "Stone":
+            game.physics.arcade.overlap(gameWorld.worker.sprite, asset.Sprite, gameWorld.stoneCollision);
+            break;
+          case "Storage":
+            game.physics.arcade.overlap(gameWorld.worker.sprite, asset.Sprite, gameWorld.storageCollision);
+            break;
           default:
 
         }
@@ -56,9 +65,20 @@ class GameWorld {
     });
   }
 
+  stoneCollision(workerSprite, stoneSprite) {
+    console.log("stoneCollision");
+    stoneSprite.destroy();
+    gameWorld.updateAssetCount("Stone", -1);
+    gameWorld.worker.hasStone = true;
+  }
+
+  storageCollision(workerSprite, storageSprite) {
+    gameWorld.worker.hasStone = false;
+  }
+
   pickAxeCollision(workerSprite, pickAxeSprite) {
     console.log("pickAxeCollision");
-    pickAxeSprite.kill();
+    pickAxeSprite.destroy();
     gameWorld.updateAssetCount("PickAxe", -1);
     gameWorld.worker.hasPickAxe = true;
   }
@@ -70,8 +90,9 @@ class GameWorld {
       rockSprite.destroy();
       gameWorld.updateAssetCount("Rock", -1);
     }
-    gameWorld.createAsset("Stone");
+      gameWorld.worker.hasStone = true;
   }
+
   cleanUp() {
     this.assets.forEach(asset => asset.Sprite.destroy());
     this.assets.forEach(asset => asset.Text.destroy());
@@ -83,7 +104,27 @@ class GameWorld {
     let assets = this.assets;
     var assetIndex = this.assetTypes.findIndex((obj => obj.Type == type));
     if (this.assetTypes[assetIndex].Count != this.assetTypes[assetIndex].Limit) {
-      var sprite = game.add.sprite(game.rnd.integerInRange(40, 780), game.rnd.integerInRange(40, 580), 'rock', 'rock.png');
+
+      var sprite = game.add.sprite(0, 0, 'rock', 'rock.png');
+      switch (type) {
+        case "Rock":
+          sprite.x = game.rnd.integerInRange(550, 750);
+          sprite.y = game.rnd.integerInRange(100, 450);
+          break;
+        case "Stone":
+          sprite.x = game.rnd.integerInRange(250, 450);
+          sprite.y = game.rnd.integerInRange(100, 450);
+          break;
+        case "PickAxe":
+          sprite.x = game.rnd.integerInRange(100, 150);
+          sprite.y = game.rnd.integerInRange(400, 450);
+          break;
+        case "Storage":
+          sprite.x = game.rnd.integerInRange(50, 100);
+          sprite.y = game.rnd.integerInRange(250, 300);
+          break;
+        default:
+      }
       game.physics.arcade.enable(sprite);
       sprite.enableBody = true;
 
