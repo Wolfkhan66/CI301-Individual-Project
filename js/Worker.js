@@ -8,6 +8,7 @@ class Worker {
     this.utility = new Utility();
     this.hasStone = false;
     this.hasPickAxe = false;
+    this.isResting = false;
     this.stamina = 100;
     this.staminaSprite = game.add.sprite(50,50, 'StaminaBarLine', 'StaminaBarLine.png')
     this.staminaSprite.width = this.stamina;

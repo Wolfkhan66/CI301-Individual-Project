@@ -66,7 +66,6 @@ class GameWorld {
   }
 
   stoneCollision(workerSprite, stoneSprite) {
-    console.log("stoneCollision");
     stoneSprite.destroy();
     gameWorld.updateAssetCount("Stone", -1);
     gameWorld.worker.hasStone = true;
@@ -78,7 +77,6 @@ class GameWorld {
   }
 
   pickAxeCollision(workerSprite, pickAxeSprite) {
-    console.log("pickAxeCollision");
     pickAxeSprite.destroy();
     gameWorld.updateAssetCount("PickAxe", -1);
     gameWorld.worker.hasPickAxe = true;
@@ -86,7 +84,6 @@ class GameWorld {
   }
 
   rockCollision(workerSprite, rockSprite) {
-    console.log("rockCollision");
     rockSprite.HitCount--;
     if (rockSprite.HitCount == 0) {
       rockSprite.destroy();
@@ -145,7 +142,6 @@ class GameWorld {
     } else {
       console.log(type + " Limit Reached");
     }
-    console.log(this.assets);
   }
 
   updateAssetCount(type, value) {
@@ -154,7 +150,6 @@ class GameWorld {
         assetType.Count += value;
       }
     });
-    console.log(this.assetTypes);
   }
 
   getAssetCount(type) {
