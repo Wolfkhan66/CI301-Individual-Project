@@ -1,6 +1,7 @@
 class Utility {
   constructor() {
     this.active = false;
+    this.currentAction = "";
     this.utilities = [{
         name: "GetStone",
         score: 0,
@@ -50,11 +51,17 @@ class Utility {
             if (gameWorld.getAssetCount("Stone") > 0) {
               action.score++;
             }
-            if (worker.hasStone) {
-              action.score--;
+            if (gameWorld.getAssetCount("Stone") > 3) {
+              action.score++;
+            }
+            if (gameWorld.getAssetCount("Stone") > 5) {
+              action.score++;
             }
             if (!worker.hasPickAxe) {
               action.score++;
+            }
+            if (worker.hasStone) {
+              action.score--;
             }
             if (gameWorld.getAssetCount("Stone") === 0) {
               action.score = 0;
@@ -65,6 +72,12 @@ class Utility {
               action.score++;
             }
             if (!worker.hasPickAxe) {
+              action.score++;
+            }
+            if (gameWorld.getAssetCount("Rock") > 0) {
+              action.score++;
+            }
+            if (gameWorld.getAssetCount("Rock") > 4) {
               action.score++;
             }
             if (worker.hasPickAxe) {
@@ -84,13 +97,13 @@ class Utility {
             if (worker.hasPickAxe) {
               action.score++;
             }
-            if (!worker.hasPickAxe) {
-              action.score--;
-            }
             if (worker.hasStone) {
               action.score--;
             }
             if (gameWorld.getAssetCount("Rock") === 0) {
+              action.score = 0;
+            }
+            if (!worker.hasPickAxe) {
               action.score = 0;
             }
             break;
@@ -101,7 +114,10 @@ class Utility {
             break;
           case "Rest":
             if (worker.isResting) {
-              action.score += 10;
+              action.score += 5;
+            }
+            if (worker.stamina < 90) {
+              action.score++;
             }
             if (worker.stamina < 75) {
               action.score++;
@@ -113,7 +129,7 @@ class Utility {
               action.score++;
             }
             if (worker.stamina < 10) {
-              action.score+= 5;
+              action.score += 5;
             }
             break;
           default:
@@ -122,8 +138,11 @@ class Utility {
 
       var bestAction = this.chooseAction();
       if (bestAction != null && bestAction.score > 0) {
-        console.log(this.utilities);
-        console.log("BestAction: " + bestAction.name + " Score: " + bestAction.score);
+        if (this.currentAction != bestAction.name) {
+          console.log(this.utilities);
+          console.log("BestAction: " + bestAction.name + " Score: " + bestAction.score);
+        }
+        this.currentAction = bestAction.name;
         bestAction.function();
       }
     }
