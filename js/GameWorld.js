@@ -38,11 +38,11 @@ class GameWorld {
     if (this.worker.utility.active) {
       this.worker.utility.checkConditions();
     }
+    this.worker.updateStamina();
   }
 
 
   checkCollisions(type) {
-    console.log("Checking For Collisions");
     this.assets.forEach(function(asset) {
       if (asset.Type === type) {
         switch (asset.Type) {
@@ -70,6 +70,7 @@ class GameWorld {
     stoneSprite.destroy();
     gameWorld.updateAssetCount("Stone", -1);
     gameWorld.worker.hasStone = true;
+    gameWorld.worker.stamina -= 5;
   }
 
   storageCollision(workerSprite, storageSprite) {
@@ -81,6 +82,7 @@ class GameWorld {
     pickAxeSprite.destroy();
     gameWorld.updateAssetCount("PickAxe", -1);
     gameWorld.worker.hasPickAxe = true;
+    gameWorld.worker.stamina -= 2;
   }
 
   rockCollision(workerSprite, rockSprite) {
@@ -90,12 +92,12 @@ class GameWorld {
       rockSprite.destroy();
       gameWorld.updateAssetCount("Rock", -1);
     }
-      gameWorld.worker.hasStone = true;
+    gameWorld.worker.hasStone = true;
+    gameWorld.worker.stamina -= 10;
   }
 
   cleanUp() {
     this.assets.forEach(asset => asset.Sprite.destroy());
-    this.assets.forEach(asset => asset.Text.destroy());
     this.assets = [];
     this.assetTypes.forEach(assetType => assetType.Count = 0);
   }
@@ -105,21 +107,25 @@ class GameWorld {
     var assetIndex = this.assetTypes.findIndex((obj => obj.Type == type));
     if (this.assetTypes[assetIndex].Count != this.assetTypes[assetIndex].Limit) {
 
-      var sprite = game.add.sprite(0, 0, 'rock', 'rock.png');
+      var sprite;
       switch (type) {
         case "Rock":
+          sprite = game.add.sprite(0, 0, 'Rock', 'Rock.png');
           sprite.x = game.rnd.integerInRange(550, 750);
           sprite.y = game.rnd.integerInRange(100, 450);
           break;
         case "Stone":
+          sprite = game.add.sprite(0, 0, 'Stone', 'Stone.png');
           sprite.x = game.rnd.integerInRange(250, 450);
           sprite.y = game.rnd.integerInRange(100, 450);
           break;
         case "PickAxe":
+          sprite = game.add.sprite(0, 0, 'Worker', 'Worker.png');
           sprite.x = game.rnd.integerInRange(100, 150);
           sprite.y = game.rnd.integerInRange(400, 450);
           break;
         case "Storage":
+          sprite = game.add.sprite(0, 0, 'Worker', 'Worker.png');
           sprite.x = game.rnd.integerInRange(50, 100);
           sprite.y = game.rnd.integerInRange(250, 300);
           break;
@@ -128,15 +134,9 @@ class GameWorld {
       game.physics.arcade.enable(sprite);
       sprite.enableBody = true;
 
-      // This is temporary until sprites are updated to better represent the asset.
-      var text = game.add.text(sprite.x, sprite.y, type, {
-        font: 10 + 'px Arial',
-        fill: '#fff'
-      });
       assets.push({
         Sprite: sprite,
-        Type: type,
-        Text: text
+        Type: type
       });
       if (type === "Rock") {
         assets[this.assets.length - 1].Sprite.HitCount = 3;
@@ -180,7 +180,6 @@ class GameWorld {
         }
       }
     });
-    console.log(sprite);
     return sprite;
   }
 

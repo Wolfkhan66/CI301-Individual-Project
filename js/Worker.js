@@ -1,7 +1,7 @@
 class Worker {
   constructor() {
     console.log("Constructing Worker");
-    this.sprite = game.add.sprite(125, 275, 'worker', 'worker.png');
+    this.sprite = game.add.sprite(125, 275, 'Worker', 'Worker.png');
     game.physics.arcade.enable(this.sprite);
     this.sprite.enableBody = true;
     this.fsm = new FSM();
@@ -9,6 +9,8 @@ class Worker {
     this.hasStone = false;
     this.hasPickAxe = false;
     this.stamina = 100;
+    this.staminaSprite = game.add.sprite(50,50, 'StaminaBarLine', 'StaminaBarLine.png')
+    this.staminaSprite.width = this.stamina;
   }
 
   setAI(type) {
@@ -26,5 +28,9 @@ class Worker {
       default:
         console.log("AI Type Not Found")
     }
+  }
+
+  updateStamina(){
+    this.staminaSprite.width = this.stamina;
   }
 }

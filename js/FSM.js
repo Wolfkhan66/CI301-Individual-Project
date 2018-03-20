@@ -7,8 +7,11 @@ class FSM {
   checkConditions() {
     var worker = gameWorld.worker;
     if (this.active) {
-      console.log("Checking FSM Conditions");
-      if (gameWorld.getAssetCount("Stone") > 0 && worker.hasStone === false) {
+      if (this.state === "Resting" && worker.stamina < 100) {
+        this.state.Resting
+      } else if (worker.stamina < 30) {
+        this.state = "Resting";
+      } else if (gameWorld.getAssetCount("Stone") > 0 && worker.hasStone === false) {
         this.state = "Getting Stone";
       } else if (worker.hasStone === true) {
         this.state = "Storing Stone";
@@ -19,8 +22,8 @@ class FSM {
       } else {
         this.state = "Resting";
       }
-      this.update();
     }
+    this.update();
   }
 
   update() {
@@ -44,9 +47,12 @@ class FSM {
       case "Storing Stone":
         this.moveToTarget(gameWorld.getSprite("Storage"))
         gameWorld.checkCollisions("Storage");
+        gameWorld.worker.stamina -= (2 / 60);
         break;
       case "Resting":
-        console.log("Resting");
+        if (gameWorld.worker.stamina < 100) {
+          gameWorld.worker.stamina += (5 / 60);
+        }
         break;
       default:
         console.log("ERROR: State '" + this.state + " ' Not Found");
