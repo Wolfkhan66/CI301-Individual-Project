@@ -117,12 +117,12 @@ class GameWorld {
           sprite.y = game.rnd.integerInRange(100, 450);
           break;
         case "PickAxe":
-          sprite = game.add.sprite(0, 0, 'Worker', 'Worker.png');
+          sprite = game.add.sprite(0, 0, 'PickAxe', 'PickAxe.png');
           sprite.x = game.rnd.integerInRange(100, 150);
           sprite.y = game.rnd.integerInRange(400, 450);
           break;
         case "Storage":
-          sprite = game.add.sprite(0, 0, 'Worker', 'Worker.png');
+          sprite = game.add.sprite(0, 0, 'Storage', 'Storage.png');
           sprite.x = game.rnd.integerInRange(50, 100);
           sprite.y = game.rnd.integerInRange(250, 300);
           break;

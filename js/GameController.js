@@ -17,9 +17,9 @@ function preload() {
   // Load game assets \\
   game.load.image('Worker', 'assets/Worker.png');
   game.load.image('Rock', 'assets/Rock.png');
-  game.load.image('PickAxe', 'assets/Rock.png');
+  game.load.image('PickAxe', 'assets/PickAxe.png');
   game.load.image('Stone', 'assets/Stone.png');
-  game.load.image('Storage', 'assets/button.png');
+  game.load.image('Storage', 'assets/Storage.png');
   game.load.image('AISelectBanner', 'assets/AISelectBanner.png');
   game.load.image('AISelectButton', 'assets/AISelectButton.png');
   game.load.image('StaminaBarLine', 'assets/StaminaBarLine.png');
