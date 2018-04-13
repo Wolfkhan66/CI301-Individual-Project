@@ -33,23 +33,28 @@ class FSM {
         console.log("Test State Running");
         break;
       case "Getting Stone":
+          ui.setText("InGameAIText", "Getting Stone");
         this.moveToTarget(gameWorld.getSprite("Stone"))
         gameWorld.checkCollisions("Stone");
         break;
       case "Getting PickAxe":
+          ui.setText("InGameAIText", "Getting PickAxe");
         this.moveToTarget(gameWorld.getSprite("PickAxe"))
         gameWorld.checkCollisions("PickAxe");
         break;
       case "Breaking Rock":
+          ui.setText("InGameAIText", "Breaking Rock");
         this.moveToTarget(gameWorld.getSprite("Rock"))
         gameWorld.checkCollisions("Rock");
         break;
       case "Storing Stone":
+          ui.setText("InGameAIText", "Storing Stone");
         this.moveToTarget(gameWorld.getSprite("Storage"))
         gameWorld.checkCollisions("Storage");
         gameWorld.worker.stamina -= (2 / 60);
         break;
       case "Resting":
+        ui.setText("InGameAIText", "Resting");
         if (gameWorld.worker.stamina < 100) {
           gameWorld.worker.stamina += (5 / 60);
         }

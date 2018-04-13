@@ -1,5 +1,6 @@
 class Utility {
   constructor() {
+    this.score = 0;
     this.active = false;
     this.currentAction = "";
     this.utilities = [{
@@ -143,6 +144,7 @@ class Utility {
           console.log("BestAction: " + bestAction.name + " Score: " + bestAction.score);
         }
         this.currentAction = bestAction.name;
+        this.score = bestAction.score;
         bestAction.function();
       }
     }
@@ -180,27 +182,37 @@ class Utility {
   }
 
   getStone() {
+    ui.setText("InGameAIText", "Get Stone");
+    ui.setText("InGameUtilityScoreText", "Score: " + this.score);
     this.move(gameWorld.getSprite("Stone"))
     gameWorld.checkCollisions("Stone");
   }
 
   getPickAxe() {
+    ui.setText("InGameAIText", "Get PickAxe");
+    ui.setText("InGameUtilityScoreText", "Score: " + this.score);
     this.move(gameWorld.getSprite("PickAxe"))
     gameWorld.checkCollisions("PickAxe");
   }
 
   breakRock() {
+    ui.setText("InGameAIText", "Break Rock");
+    ui.setText("InGameUtilityScoreText", "Score: " + this.score);
     this.move(gameWorld.getSprite("Rock"))
     gameWorld.checkCollisions("Rock");
   }
 
   storeStone() {
+    ui.setText("InGameAIText", "Store Stone");
+    ui.setText("InGameUtilityScoreText", "Score: " + this.score);
     this.move(gameWorld.getSprite("Storage"))
     gameWorld.checkCollisions("Storage");
     gameWorld.worker.stamina -= (5 / 60);
   }
 
   rest() {
+    ui.setText("InGameAIText", "Rest");
+    ui.setText("InGameUtilityScoreText", "Score: " + this.score);
     if (gameWorld.worker.stamina < 100) {
       gameWorld.worker.stamina += (20 / 60);
       gameWorld.worker.isResting = true;

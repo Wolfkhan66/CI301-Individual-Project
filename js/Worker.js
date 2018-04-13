@@ -34,4 +34,13 @@ class Worker {
   updateStamina() {
     this.staminaSprite.width = this.stamina;
   }
+
+  reset(){
+    this.fsm = new FSM();
+    this.utility = new Utility();
+    this.hasStone = false;
+    this.hasPickAxe = false;
+    this.isResting = false;
+    this.stamina = 100;
+  }
 }

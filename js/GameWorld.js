@@ -97,6 +97,7 @@ class GameWorld {
     this.assets.forEach(asset => asset.Sprite.destroy());
     this.assets = [];
     this.assetTypes.forEach(assetType => assetType.Count = 0);
+    this.worker.reset();
   }
 
   createAsset(type) {

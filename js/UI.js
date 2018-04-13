@@ -26,6 +26,7 @@ class UI {
     this.addEvent("FSMSelectButton", null, function() {
       ui.setScreen("InGame");
       ui.toggleVisible("InGameUtlityText", false);
+      ui.toggleVisible("InGameUtilityScoreText", false);
       gameWorld.worker.setAI("FSM");
     });
 
@@ -40,6 +41,8 @@ class UI {
     this.createSprite("InGameUI", "InGame", 0, 0, 800, 600, "InGameUI");
     this.createText("InGameFSMText", "InGame", 345, 25, "FSM", 30);
     this.createText("InGameUtlityText", "InGame", 345, 25, "Utility", 30);
+    this.createText("InGameAIText", "InGame", 590, 525, "Thinking", 25);
+    this.createText("InGameUtilityScoreText", "InGame", 590, 555, "Score:", 20);
 
     this.createSprite("InGameBackButton", "InGame", 10, 10, 128, 62, "BackButton");
     this.addEvent("InGameBackButton", null, function() {
@@ -126,6 +129,14 @@ class UI {
     this.elements.forEach(function(element) {
       if (element.Name == Name) {
         element.Object.visible = Visible;
+      }
+    });
+  }
+
+  setText(Name, Text) {
+    this.elements.forEach(function(element) {
+      if (element.Name == Name) {
+        element.Object.text = Text;
       }
     });
   }
