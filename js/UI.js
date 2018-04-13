@@ -8,62 +8,57 @@ class UI {
     this.screen = "";
 
     //MainMenu UI
-    this.createText("SplashText", "MainMenu", game.width / 2, game.height / 2, "This is the Main Menu", 20);
-    this.createText("SplashContinueText", "MainMenu", game.width / 2, game.height / 2 + 30, "click to continue", 20);
-    this.addEvent("SplashContinueText", function() {
+    this.createSprite("MainMenuUI", "MainMenu", 0, 0, 800, 600, "MainMenuUI");
+    this.createSprite("MainMenuButton", "MainMenu", 280, 400, 250, 60, "MainMenuButton");
+    this.addEvent("MainMenuButton", null, function() {
       ui.setScreen("AISelect");
-    }, null);
+    });
 
     //AISelect UI
-    this.createSprite("AiSelectBanner", "AISelect", 200, 100, 400, 100, "AISelectBanner");
-    this.createText("AISelectText", "AISelect", 290, 125, "Select an AI", 40);
+    this.createSprite("AiSelectUI", "AISelect", 0, 0, 800, 600, "AISelectUI");
 
-    this.createSprite("FSMBackButton", "AISelect", 750, 50, 30, 18, "BackButton");
+    this.createSprite("FSMBackButton", "AISelect", 10, 10, 128, 62, "BackButton");
     this.addEvent("FSMBackButton", null, function() {
       ui.setScreen("MainMenu");
     });
 
-    this.createSprite("FSMSelectButton", "AISelect", 150, 300, 150, 100, "AISelectButton");
+    this.createSprite("FSMSelectButton", "AISelect", 125, 350, 200, 60, "AISelectFSMButton");
     this.addEvent("FSMSelectButton", null, function() {
       ui.setScreen("InGame");
+      ui.toggleVisible("InGameUtlityText", false);
       gameWorld.worker.setAI("FSM");
     });
-    this.createText("SelectFSMText", "AISelect", 205, 340, "FSM", 20);
-    this.addEvent("SelectFSMText", function() {
-      ui.setScreen("InGame");
-      gameWorld.worker.setAI("FSM");
-    }, null);
 
-    this.createSprite("UtilitySelectButton", "AISelect", 500, 300, 150, 100, "AISelectButton");
+    this.createSprite("UtilitySelectButton", "AISelect", 505, 350, 200, 60, "AISelectUtilityButton");
     this.addEvent("UtilitySelectButton", null, function() {
       ui.setScreen("InGame");
+      ui.toggleVisible("InGameFSMText", false);
       gameWorld.worker.setAI("Utility");
     });
-    this.createText("SelectUtilityText", "AISelect", 550, 340, "Utility", 20)
-    this.addEvent("SelectUtilityText", function() {
-      ui.setScreen("InGame");
-      gameWorld.worker.setAI("Utility");
-    }, null);
 
     //InGame UI
-    this.createSprite("FSMBackButton", "InGame", 750, 50, 30, 18, "BackButton");
-    this.addEvent("FSMBackButton", null, function() {
+    this.createSprite("InGameUI", "InGame", 0, 0, 800, 600, "InGameUI");
+    this.createText("InGameFSMText", "InGame", 345, 25, "FSM", 30);
+    this.createText("InGameUtlityText", "InGame", 345, 25, "Utility", 30);
+
+    this.createSprite("InGameBackButton", "InGame", 10, 10, 128, 62, "BackButton");
+    this.addEvent("InGameBackButton", null, function() {
       ui.setScreen("MainMenu");
     });
 
-    this.createText("CreateRockText", "InGame", 30, 560, "Rock", 20)
-    this.addEvent("CreateRockText", null, function() {
+    this.createSprite("InGameStoneButton", "InGame", 11, 527, 128, 62, "InGameStoneButton");
+    this.addEvent("InGameStoneButton", null, function() {
+      gameWorld.createAsset("Stone");
+    });
+
+    this.createSprite("InGameRockButton", "InGame", 149, 527, 128, 62, "InGameRockButton");
+    this.addEvent("InGameRockButton", null, function() {
       gameWorld.createAsset("Rock");
     });
 
-    this.createText("CreatePickAxeText", "InGame", 130, 560, "PickAxe", 20)
-    this.addEvent("CreatePickAxeText", null, function() {
+    this.createSprite("InGamePickAxeButton", "InGame", 287, 527, 128, 62, "InGamePickAxeButton");
+    this.addEvent("InGamePickAxeButton", null, function() {
       gameWorld.createAsset("PickAxe");
-    });
-
-    this.createText("CreateStoneText", "InGame", 230, 560, "Stone", 20)
-    this.addEvent("CreateStoneText", null, function() {
-      gameWorld.createAsset("Stone");
     });
   }
 
@@ -74,16 +69,13 @@ class UI {
     switch (screen) {
       case "MainMenu":
         this.showUI("MainMenu");
-          gameWorld.cleanUp();
-          game.stage.backgroundColor = "#b1b1ec";
+        gameWorld.cleanUp();
         break;
       case "AISelect":
         this.showUI("AISelect");
-          game.stage.backgroundColor = "#b1b1ec";
         break;
       case "InGame":
         this.showUI("InGame");
-          game.stage.backgroundColor = "#008000";
         break;
       default:
         console.log(screen + " not found");
@@ -93,7 +85,7 @@ class UI {
   createText(name, UI, x, y, string, size) {
     var textObject = game.add.text(x, y, string, {
       font: size + 'px Arial',
-      fill: '#000000'
+      fill: '#ffffff'
     });
     this.elements.push({
       Name: name,
@@ -126,6 +118,14 @@ class UI {
           element.Object.inputEnabled = true;
           element.Object.events.onInputUp.add(eventUp, this);
         }
+      }
+    });
+  }
+
+  toggleVisible(Name, Visible) {
+    this.elements.forEach(function(element) {
+      if (element.Name == Name) {
+        element.Object.visible = Visible;
       }
     });
   }

@@ -20,10 +20,17 @@ function preload() {
   game.load.image('PickAxe', 'assets/PickAxe.png');
   game.load.image('Stone', 'assets/Stone.png');
   game.load.image('Storage', 'assets/Storage.png');
-  game.load.image('AISelectBanner', 'assets/AISelectBanner.png');
-  game.load.image('AISelectButton', 'assets/AISelectButton.png');
+  game.load.image('AISelectUI', 'assets/AISelectUI.png');
+  game.load.image('AISelectFSMButton', 'assets/AISelectFSMButton.png');
+  game.load.image('AISelectUtilityButton', 'assets/AISelectUtilityButton.png');
   game.load.image('StaminaBarLine', 'assets/StaminaBarLine.png');
   game.load.image('BackButton', 'assets/BackButton.png');
+  game.load.image('MainMenuUI', 'assets/MainMenu.png');
+  game.load.image('MainMenuButton', 'assets/MainMenuButton.png');
+  game.load.image('InGameUI', 'assets/InGameUI.png');
+  game.load.image('InGameStoneButton', 'assets/InGameStoneButton.png');
+  game.load.image('InGameRockButton', 'assets/InGameRockButton.png');
+  game.load.image('InGamePickAxeButton', 'assets/InGamePickAxeButton.png');
   console.log("Assets Loaded.");
 }
 

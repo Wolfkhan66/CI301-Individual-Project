@@ -10,7 +10,7 @@ class Worker {
     this.hasPickAxe = false;
     this.isResting = false;
     this.stamina = 100;
-    this.staminaSprite = game.add.sprite(50,50, 'StaminaBarLine', 'StaminaBarLine.png')
+    this.staminaSprite = game.add.sprite(20, 104, 'StaminaBarLine', 'StaminaBarLine.png')
     this.staminaSprite.width = this.stamina;
   }
 
@@ -31,7 +31,7 @@ class Worker {
     }
   }
 
-  updateStamina(){
+  updateStamina() {
     this.staminaSprite.width = this.stamina;
   }
 }
